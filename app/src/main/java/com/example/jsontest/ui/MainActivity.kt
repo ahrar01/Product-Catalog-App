@@ -19,7 +19,6 @@ import com.example.jsontest.ui.products.ProductsViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.filter_bottom_sheet.*
 import kotlinx.android.synthetic.main.filter_bottom_sheet.view.*
 import kotlinx.android.synthetic.main.sort_bottom_sheet.view.*
 
@@ -31,6 +30,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var adapter: MyAdapter
     var lowToHigh: Boolean = false
     var highToLow: Boolean = false
+    lateinit var filteredItems: List<Catalog>
+    lateinit var availableItems: List<Catalog>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,15 +74,22 @@ class MainActivity : AppCompatActivity() {
             val dialog = BottomSheetDialog(this)
             val view = layoutInflater.inflate(R.layout.filter_bottom_sheet, null)
             view.chipVegetable.setOnClickListener {
-                Toasty.success(this, "Vegetable clicked", Toast.LENGTH_SHORT).show();
+                filteredItems = filterCartItems(availableItems, "Vegetable")
+                updateRecylerView(filteredItems)
+
+                Toasty.success(this, "Vegetables", Toast.LENGTH_SHORT).show();
                 dialog.dismiss()
             }
             view.chipHerbs.setOnClickListener {
-                Toasty.success(this, "Herbs clicked", Toast.LENGTH_SHORT).show();
+                filteredItems = filterCartItems(availableItems, "Herbs")
+                updateRecylerView(filteredItems)
+                Toasty.success(this, "Herbs ", Toast.LENGTH_SHORT).show();
                 dialog.dismiss()
             }
             view.chipFish.setOnClickListener {
-                Toasty.success(this, "fish clicked", Toast.LENGTH_SHORT).show();
+                filteredItems = filterCartItems(availableItems, "fish")
+                updateRecylerView(filteredItems)
+                Toasty.success(this, "Fish ", Toast.LENGTH_SHORT).show();
                 dialog.dismiss()
             }
             dialog.setCancelable(true)
@@ -90,10 +98,46 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateRecylerView(filteredItems: List<Catalog>) {
+
+        adapter = MyAdapter(filteredItems as MutableList<Catalog>)
+        activity_items_rv.adapter = adapter
+        adapter.notifyDataSetChanged()
+
+        adapter.setOnItemClickListener(object :
+            MyAdapter.ClickListener {
+            override fun onClick(pos: Int, aView: View) {
+                val cartItem: Catalog = adapter.getItem(pos) as Catalog;
+                if (cartItem == null)
+                    return;
+                val intent = Intent(this@MainActivity, IndividualProduct::class.java)
+                intent.putExtra("product", cartItem)
+                startActivity(intent)
+            }
+
+        })
+
+    }
+
+    fun filterCartItems(cartList: List<Catalog>, searchQuery: String): List<Catalog> {
+
+
+        val filteredValues = ArrayList<Catalog>(cartList)
+        for (cartItem in cartList) {
+            val searchText = "${cartItem.name}  ${cartItem.categories}  ${cartItem.categories}"
+            if (!(searchText.toLowerCase()).contains(searchQuery.toLowerCase()))
+                filteredValues.remove(cartItem)
+        }
+
+        return filteredValues
+
+    }
+
     private fun fetchCatalog() {
         activity_progress_bar.visibility = View.VISIBLE
 
         viewModel.products.observe(this, Observer { products ->
+            availableItems = products
             activity_items_rv.also {
                 it.layoutManager = GridLayoutManager(this, 2)
                 it.setHasFixedSize(true)

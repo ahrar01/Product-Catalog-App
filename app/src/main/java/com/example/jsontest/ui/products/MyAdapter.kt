@@ -69,7 +69,7 @@ class MyAdapter(private val catalog: MutableList<Catalog>) :
                     it
                 )
             }
-            itemView.item_cart_metric_weight_tv.text = catalogData.weight
+            itemView.item_cart_metric_weight_tv.text = catalogData.weight + "Kg"
 
             Log.i(TAG, catalogData.images[0].src)
 
