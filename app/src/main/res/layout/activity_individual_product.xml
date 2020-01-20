@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".Activity.IndividualProduct">
+    tools:context=".ui.products.IndividualProduct">
 
 
     <com.google.android.material.appbar.AppBarLayout

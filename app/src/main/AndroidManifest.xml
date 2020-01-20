@@ -15,9 +15,10 @@
         android:usesCleartextTraffic="true"
         android:hardwareAccelerated="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activity.IndividualProduct"
+        <activity
+            android:name=".ui.products.IndividualProduct"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

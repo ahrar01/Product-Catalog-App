@@ -1,4 +1,4 @@
-package com.example.jsontest.Activity
+package com.example.jsontest.ui.products
 
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -8,9 +8,9 @@ import androidx.core.text.HtmlCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.jsontest.Models.Catalog
+import com.example.jsontest.data.models.Catalog
 import com.example.jsontest.R
-import com.example.jsontest.Utils.PriceFormatter
+import com.example.jsontest.util.PriceFormatter
 import kotlinx.android.synthetic.main.activity_individual_product.*
 
 class IndividualProduct : AppCompatActivity() {

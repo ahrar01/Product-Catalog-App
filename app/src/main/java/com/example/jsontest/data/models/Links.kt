@@ -1,4 +1,4 @@
-package com.example.jsontest.Models
+package com.example.jsontest.data.models
 
 
 import android.os.Parcelable

@@ -1,4 +1,4 @@
-package com.example.jsontest.Models
+package com.example.jsontest.data.models
 
 
 import android.os.Parcelable
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Collection(
+data class Self(
     @SerializedName("href")
     val href: String
 ) : Parcelable

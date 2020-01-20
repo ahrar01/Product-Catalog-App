@@ -1,4 +1,4 @@
-package com.example.jsontest.Utils
+package com.example.jsontest.util
 
 class PriceFormatter {
     // equivalent to static scope

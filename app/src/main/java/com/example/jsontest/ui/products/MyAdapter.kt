@@ -1,4 +1,4 @@
-package com.example.jsontest.Adapter
+package com.example.jsontest.ui.products
 
 import android.content.Context
 import android.util.Log
@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.example.jsontest.Models.Catalog
+import com.example.jsontest.data.models.Catalog
 import com.example.jsontest.R
-import com.example.jsontest.Utils.PriceFormatter
+import com.example.jsontest.util.PriceFormatter
 import kotlinx.android.synthetic.main.item_view.view.*
 
 class MyAdapter(private val catalog: MutableList<Catalog>) :
