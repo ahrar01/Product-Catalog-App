@@ -1,23 +1,28 @@
 package com.example.jsontest.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.jsontest.ui.products.IndividualProduct
-import com.example.jsontest.ui.products.MyAdapter
 import com.example.jsontest.R
 import com.example.jsontest.data.models.Catalog
 import com.example.jsontest.data.network.ProductsApi
 import com.example.jsontest.data.repositories.ProductsRepository
+import com.example.jsontest.ui.products.IndividualProduct
+import com.example.jsontest.ui.products.MyAdapter
 import com.example.jsontest.ui.products.ProductsViewModel
 import com.example.jsontest.ui.products.ProductsViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.filter_bottom_sheet.*
+import kotlinx.android.synthetic.main.filter_bottom_sheet.view.*
 import kotlinx.android.synthetic.main.sort_bottom_sheet.view.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         fetchCatalog()
 
+        //SORT PRICE
         sortPrice.setOnClickListener {
             val dialog = BottomSheetDialog(this)
             val view = layoutInflater.inflate(R.layout.sort_bottom_sheet, null)
@@ -61,6 +67,27 @@ class MainActivity : AppCompatActivity() {
             dialog.setContentView(view)
             dialog.show()
         }
+
+        //FILTER CATEGORY
+        filterCategory.setOnClickListener {
+            val dialog = BottomSheetDialog(this)
+            val view = layoutInflater.inflate(R.layout.filter_bottom_sheet, null)
+            view.chipVegetable.setOnClickListener {
+                Toasty.success(this, "Vegetable clicked", Toast.LENGTH_SHORT).show();
+                dialog.dismiss()
+            }
+            view.chipHerbs.setOnClickListener {
+                Toasty.success(this, "Herbs clicked", Toast.LENGTH_SHORT).show();
+                dialog.dismiss()
+            }
+            view.chipFish.setOnClickListener {
+                Toasty.success(this, "fish clicked", Toast.LENGTH_SHORT).show();
+                dialog.dismiss()
+            }
+            dialog.setCancelable(true)
+            dialog.setContentView(view)
+            dialog.show()
+        }
     }
 
     private fun fetchCatalog() {
@@ -74,11 +101,9 @@ class MainActivity : AppCompatActivity() {
                 if (highToLow == true) {
                     adapter =
                         MyAdapter(products.sortedByDescending { products -> products.price } as MutableList<Catalog>)
-
                 } else if (lowToHigh == true) {
                     adapter =
                         MyAdapter(products.sortedBy { products -> products.price } as MutableList<Catalog>)
-
                 } else {
                     adapter = MyAdapter(products as MutableList<Catalog>)
                 }

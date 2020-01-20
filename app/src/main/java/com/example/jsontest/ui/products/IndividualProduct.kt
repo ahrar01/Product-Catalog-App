@@ -12,6 +12,7 @@ import com.example.jsontest.data.models.Catalog
 import com.example.jsontest.R
 import com.example.jsontest.util.PriceFormatter
 import kotlinx.android.synthetic.main.activity_individual_product.*
+import java.lang.Exception
 
 class IndividualProduct : AppCompatActivity() {
 
@@ -38,13 +39,20 @@ class IndividualProduct : AppCompatActivity() {
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .dontAnimate().into(productimage)
 
+        try {
+            product_name.setText(cartItem!!.name)
+            var regularPrice = PriceFormatter.getFormattedPrice(cartItem!!.regularPrice.toDouble())
+            var salePrice = PriceFormatter.getFormattedPrice(cartItem!!.salePrice.toDouble())
+            product_price.text = HtmlCompat.fromHtml(
+                "<strike>$regularPrice</strike> $salePrice ",
+                HtmlCompat.FROM_HTML_MODE_LEGACY
+            )
+            var str: String = cartItem!!.description
+            product_desc.text = getTagValue(str)
+        } catch (e: Exception) {
 
-        product_name.setText(cartItem!!.name)
-        var regularPrice = PriceFormatter.getFormattedPrice(cartItem!!.regularPrice.toDouble())
-        var salePrice = PriceFormatter.getFormattedPrice(cartItem!!.salePrice.toDouble())
-        product_price.text = HtmlCompat.fromHtml("<strike>$regularPrice</strike> $salePrice ",HtmlCompat.FROM_HTML_MODE_LEGACY)
-        var str: String = cartItem!!.description
-        product_desc.text = getTagValue(str)
+        }
+
 
     }
 

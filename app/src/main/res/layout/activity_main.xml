@@ -65,6 +65,7 @@
             android:background="@color/grey_light" />
 
         <LinearLayout
+            android:id="@+id/filterCategory"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"
+            android:text="FILTER BY"
+            android:textColor="@color/md_grey_500" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_light" />
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:padding="8dp">
+
+
+        <com.robertlevonyan.views.chip.Chip
+            android:id="@+id/chipVegetable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Vegetable"
+            app:mcv_backgroundColor="@color/md_red_400"
+            app:mcv_selectedBackgroundColor="@color/colorPrimaryDark"
+            app:mcv_textColor="@color/color_white" />
+
+
+        <com.robertlevonyan.views.chip.Chip
+            android:id="@+id/chipHerbs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_toEndOf="@+id/chipVegetable"
+            android:text="Herbs"
+            app:mcv_backgroundColor="@color/md_red_400"
+
+            app:mcv_selectedBackgroundColor="@color/colorPrimaryDark"
+            app:mcv_textColor="@color/color_white" />
+
+        <com.robertlevonyan.views.chip.Chip
+            android:id="@+id/chipFish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_toEndOf="@+id/chipHerbs"
+            android:text="Fish"
+            app:mcv_backgroundColor="@color/md_red_400"
+            app:mcv_selectedBackgroundColor="@color/colorPrimaryDark"
+            app:mcv_textColor="@color/color_white" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

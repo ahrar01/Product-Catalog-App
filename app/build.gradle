@@ -79,4 +79,7 @@ dependencies {
     implementation 'com.airbnb.android:lottie:3.0.7'
     // Toasty
     implementation 'com.github.GrenderG:Toasty:1.4.2'
+
+    //Chip View
+    implementation 'com.robertlevonyan.view:MaterialChipView:2.0.3'
 }
